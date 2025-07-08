@@ -20,6 +20,7 @@ body {
 
 .underline {
     text-decoration: underline;
+    margin-bottom: 5px; /* or whatever you prefer */
 }
 
 .LegoLogo {
@@ -100,7 +101,7 @@ body {
 }
 
 .lego-gallery {
-    max-width: 160px;  /* Adjust this value to make it smaller/larger */
+    max-width: 170px;  /* Adjust this value to make it smaller/larger */
     height: auto;
     display: block;
     margin: 0 auto;  /* Centers the image */
@@ -245,6 +246,11 @@ body {
     }
 }
 
+#modal2 .modal-image {
+    max-width: 60vw;   /* or any value you want */
+    max-height: 60vh;
+}
+
 .modal-close {
     position: absolute;
     top: 20px;
@@ -308,7 +314,7 @@ body {
     border: none;
     padding: 16px 12px;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 45px;
     border-radius: 4px;
     transition: background 0.3s ease;
     z-index: 10001;
@@ -451,6 +457,71 @@ body {
         max-width: 100%;
         height: clamp(150px, 40vw, 200px);
     }
+
+    .lego-gallery {
+        width: 95vw;
+        max-width: 95vw;
+    }
+
+    .slideshow-btn {
+        font-size: 36px;
+        padding: 24px 18px;
+    }
+}
+
+@media (max-width: 700px) {
+    .modal-close {
+        font-size: 100px;   /* The "X" is very large */
+        padding: 0 40px;    /* The clickable area is also much wider horizontally */
+        top: 10px;
+        right: 10px;
+        z-index: 100000;    /* Make sure it's on top of everything */
+    }
+}
+
+.image-row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: nowrap;
+    margin: 20px 0;
+}
+.image-row .responsive-image {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: transform 0.2s;
+    object-fit: contain;
+}
+.image-row .responsive-image:hover {
+    transform: scale(1.05);
+}
+@media (max-width: 700px) {
+    .image-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .image-row .responsive-image {
+        width: 90vw;
+        max-width: 98vw;
+        flex: none;
+    }
+}
+
+.modal-caption {
+    text-align: center;
+    font-size: 1.1em;
+    color: #f1f1f1;
+    margin-top: 18px;
+    margin-bottom: 0;
+    padding: 0 16px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
 }
 
 
