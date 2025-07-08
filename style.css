@@ -1,0 +1,529 @@
+/* # for id and . for class */
+
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    margin-left: 0px;
+}
+
+/* If you want to make the header GIF smaller too */
+#header .LegoLogo {
+    max-width: 250px;  /* Smaller size for header */
+    height: auto;
+}
+
+.underline {
+    text-decoration: underline;
+    margin-bottom: 5px; /* or whatever you prefer */
+}
+
+.LegoLogo {
+    max-width: 250px;
+    height: auto;
+    display: block;
+}
+
+/* Sliding animation for header logo */
+.sliding-header {
+    animation: slideInFromLeft 1.1s ease-out;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Alternative: Slide from left */
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Alternative: Slide from bottom */
+@keyframes slideInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide from top animation for gallery */
+@keyframes slideInFromTop {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#imageBox {
+    margin-left: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.summary-content {
+    margin-left: 10px;
+}
+
+.lego-gallery {
+    max-width: 170px;  /* Adjust this value to make it smaller/larger */
+    height: auto;
+    display: block;
+    margin: 0 auto;  /* Centers the image */
+    transition: opacity 0.3s ease; /* Smooth transition for the fade effect */
+}
+
+.lego-back {
+    max-width: 220px;  /* Smaller size */
+    height: auto;
+    display: block;
+    margin: 0 auto;  /* Centers the image */
+    transition: opacity 0.3s ease; /* Smooth transition for the fade effect */
+}
+
+
+/* Sliding down animation for gallery image */
+.sliding-gallery {
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: slideInFromTop 1.3s ease-out forwards;
+    animation-delay: 0.8s; /* Longer delay to ensure smooth entrance */
+}
+
+/* Hover effect for the gallery button */
+.gallery-button:hover .lego-gallery {
+    opacity: 0.7; /* Makes it fade to 70% opacity when hovered */
+}
+
+/* Alternative: You can also add a subtle scale effect */
+.gallery-button:hover .lego-gallery {
+    opacity: 0.7;
+    transform: scale(0.95); /* Slightly shrinks the image */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Horizontal image container */
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(10px, 2vw, 30px);
+    margin: 20px 0;
+    padding: 0 clamp(10px, 3vw, 30px);
+    flex-wrap: nowrap; /* Prevents wrapping to keep horizontal layout */
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive images that auto-scale */
+.responsive-image {
+    flex: 1;
+    max-width: min(400px, 30vw);
+    min-width: clamp(150px, 20vw, 250px);
+    height: clamp(200px, 25vw, 350px);
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    animation: slideInFromBottom 0.8s ease-out;
+}
+
+/* Slide in animation for images */
+@keyframes slideInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger the animations for each image */
+.responsive-image:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.responsive-image:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.responsive-image:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.responsive-image:active {
+    transform: scale(1.2);
+    z-index: 100;
+    position: relative;
+}
+
+/* CSS-only Modal Styles */
+.css-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+.css-modal:target {
+    display: block;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced scaling for first 2 images in modal */
+#modal1 .modal-image,
+#modal2 .modal-image {
+    max-width: 95%;
+    max-height: 95%;
+    transform: translate(-50%, -50%) scale(1.5);
+    transition: transform 0.3s ease;
+}
+
+/* Even larger scaling for very high resolution displays */
+@media (min-width: 1920px) {
+    #modal1 .modal-image,
+    #modal2 .modal-image {
+        max-width: 90%;
+        max-height: 90%;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+#modal2 .modal-image {
+    max-width: 60vw;   /* or any value you want */
+    max-height: 60vh;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    outline: none;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #bbb;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+
+/* Auto-focus the close button when modal opens */
+.css-modal:target .modal-close {
+    animation: focusClose 0.1s ease-in;
+}
+
+@keyframes focusClose {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Slideshow Styles */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide.active {
+    display: flex;
+}
+
+.slideshow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    padding: 16px 12px;
+    cursor: pointer;
+    font-size: 45px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    z-index: 10001;
+}
+
+.slideshow-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+.slideshow-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10001;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dot.active {
+    background: white;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.image-link {
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover effect for images */
+.responsive-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Special styling for the duck image to show full picture */
+.duck-image {
+    object-fit: contain !important;
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+
+
+
+/* Optimized Gallery Grid System */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 3vw, 40px);
+    margin: 30px auto;
+    padding: 0 clamp(20px, 4vw, 40px);
+    max-width: 1400px;
+}
+
+.gallery-item {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto;
+    max-height: clamp(200px, 25vw, 300px);
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: #f8f8f8;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.gallery-item p {
+    margin: 15px 0 0 0;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Responsive design for different screen sizes */
+@media (max-width: 1200px) {
+    .responsive-image {
+        max-width: min(350px, 28vw);
+        height: clamp(180px, 22vw, 300px);
+    }
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 15px;
+    }
+    
+    .responsive-image {
+        max-width: min(300px, 80vw);
+        min-width: auto;
+        height: clamp(200px, 50vw, 250px);
+    }
+}
+
+@media (max-width: 480px) {
+    .image-container {
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .responsive-image {
+        max-width: 100%;
+        height: clamp(150px, 40vw, 200px);
+    }
+
+    .lego-gallery {
+        width: 95vw;
+        max-width: 95vw;
+    }
+
+    .slideshow-btn {
+        font-size: 36px;
+        padding: 24px 18px;
+    }
+}
+
+@media (max-width: 700px) {
+    .modal-close {
+        font-size: 100px;   /* The "X" is very large */
+        padding: 0 40px;    /* The clickable area is also much wider horizontally */
+        top: 10px;
+        right: 10px;
+        z-index: 100000;    /* Make sure it's on top of everything */
+    }
+}
+
+.image-row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: nowrap;
+    margin: 20px 0;
+}
+.image-row .responsive-image {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: transform 0.2s;
+    object-fit: contain;
+}
+.image-row .responsive-image:hover {
+    transform: scale(1.05);
+}
+@media (max-width: 700px) {
+    .image-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .image-row .responsive-image {
+        width: 90vw;
+        max-width: 98vw;
+        flex: none;
+    }
+}
+
+.modal-caption {
+    text-align: center;
+    font-size: 1.1em;
+    color: #f1f1f1;
+    margin-top: 18px;
+    margin-bottom: 0;
+    padding: 0 16px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+
+
+
